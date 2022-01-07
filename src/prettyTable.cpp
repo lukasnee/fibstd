@@ -1,4 +1,4 @@
-#include "include/fibutils/prettyTable.hpp"
+#include "fibutils/prettyTable.hpp"
 
 #include <cstring>
 

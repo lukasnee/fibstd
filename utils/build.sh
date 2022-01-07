@@ -1,8 +1,6 @@
-#1/bin/bash
+#!/bin/bash
 
-set -e
-
-BUILD_DIR=".build"
+source "utils/config.sh"
 
 if [[ ! -d $BUILD_DIR ]]; then
     rm -rf $BUILD_DIR
@@ -11,4 +9,4 @@ fi
 
 pushd $BUILD_DIR
 cmake ..
-make
+cmake --build . -- -j $(nproc) 

@@ -4,10 +4,21 @@
             "label": "build tests",
             "type": "shell",
             "linux": {
-                "command": "./build.sh"
+                "command": "utils/build.sh && utils/runUnitTests.sh"
             },
             "group": {
                 "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "run unit tests",
+            "type": "shell",
+            "linux": {
+                "command": "utils/runUnitTests.sh"
+            },
+            "group": {
+                "kind": "test",
                 "isDefault": true
             }
         }

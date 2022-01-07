@@ -1,4 +1,4 @@
-#include "include/fibutils/uptime.hpp"
+#include "fibutils/uptime.hpp"
 
 namespace Fib::Utils
 {

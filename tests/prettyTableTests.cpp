@@ -7,8 +7,8 @@
 
 #include "catch.hpp"
 
-#include "include/fibutils/prettyTable.hpp"
-#include "include/fibutils/uptime.hpp"
+#include "fibutils/prettyTable.hpp"
+#include "fibutils/uptime.hpp"
 
 TEST_CASE("prettyTable")
 {
