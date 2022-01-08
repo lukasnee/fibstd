@@ -23,7 +23,8 @@ int customPrintf(const char *fmt, ...)
     if (result > 0)
     {
         actualOutput.append(stringBufferTmp.data());
-        std::printf(stringBufferTmp.data());
+        // printf("%s", stringBufferTmp.data());
+        // std::puts(stringBufferTmp.data()); // useful - nicely displays individual prints
     }
     va_end(args);
     return result;
