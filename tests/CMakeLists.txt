@@ -5,11 +5,13 @@ project(fibutilsTests)
 set(CMAKE_CXX_STANDARD 17)
 
 ADD_EXECUTABLE(${PROJECT_NAME}
+    main.cpp
+    configTemplateTests.cpp
     prettyTableTests.cpp
 )
 
 target_compile_options(${PROJECT_NAME} PRIVATE 
-    -ggdb
+    -O3 #-ggdb
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE 

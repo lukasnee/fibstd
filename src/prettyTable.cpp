@@ -9,17 +9,17 @@ int PrettyTable::printPaddingAndCloseField(std::size_t descrIndex, std::uint16_t
     int charsPrinted = 0;
     for (std::size_t i = charsAlreadyPrinted; i < this->descriptors[descrIndex].width; i++)
     {
-        charsPrinted += this->printfF(Config::Format::space);
+        charsPrinted += this->printfF(this->format.config.space.get());
     }
-    charsPrinted += this->printSpacing(Config::Format::space);
-    charsPrinted += this->printfF(Config::Format::verticalBorder);
+    charsPrinted += this->printSpacing(this->format.config.space.get());
+    charsPrinted += this->printfF(this->format.config.verticalBorder.get());
     return charsPrinted;
 }
 
 int PrettyTable::printSpacing(const char *strSpacing)
 {
     int charsPrinted = 0;
-    for (std::size_t i = Config::Format::columnSpacing; i; i--)
+    for (std::size_t i = this->format.config.columnSpacing.get(); i; i--)
     {
         if (std::strlen(strSpacing) == 0)
         {
@@ -60,95 +60,97 @@ int PrettyTable::printEndOfTable()
 int PrettyTable::printPlainLine()
 {
     int charsPrinted = 0;
-    charsPrinted += this->printfF(Config::Format::corner);
+    charsPrinted += this->printfF(this->format.config.corner.get());
     for (std::size_t i = 0; i < this->descriptors.count(); i++)
     {
-        charsPrinted += this->printSpacing(Config::Format::horizontalBorder);
+        charsPrinted += this->printSpacing(this->format.config.horizontalBorder.get());
         for (std::size_t underlineLeft = this->descriptors[i].width; underlineLeft > 0; underlineLeft--)
         {
-            charsPrinted += this->printfF(Config::Format::horizontalBorder);
+            charsPrinted += this->printfF(this->format.config.horizontalBorder.get());
         }
-        charsPrinted += this->printSpacing(Config::Format::horizontalBorder);
+        charsPrinted += this->printSpacing(this->format.config.horizontalBorder.get());
         if (this->descriptors.count() - i > 1)
         {
-            charsPrinted += this->printfF(Config::Format::horizontalBorder);
+            charsPrinted += this->printfF(this->format.config.horizontalBorder.get());
         }
         else
         {
-            charsPrinted += this->printfF(Config::Format::corner);
+            charsPrinted += this->printfF(this->format.config.corner.get());
         }
     }
-    charsPrinted += this->printfF(Config::Format::newline);
+    charsPrinted += this->printfF(this->format.config.newline.get());
     return charsPrinted;
 }
 
 int PrettyTable::printTitle()
 {
     int charsPrinted = 0;
-    charsPrinted += this->printfF(Config::Format::verticalBorder);
-    std::uint16_t totalTableWidth = std::strlen(Config::Format::verticalBorder);
+    charsPrinted += this->printfF(this->format.config.verticalBorder.get());
+    std::uint16_t totalTableWidth = std::strlen(this->format.config.verticalBorder.get());
     for (std::size_t i = 0; i < this->descriptors.count(); i++)
     {
-        totalTableWidth += Config::Format::columnSpacing;
+        totalTableWidth += this->format.config.columnSpacing.get();
         totalTableWidth += this->descriptors[i].width;
-        totalTableWidth += Config::Format::columnSpacing;
-        totalTableWidth += std::strlen(Config::Format::verticalBorder);
+        totalTableWidth += this->format.config.columnSpacing.get();
+        totalTableWidth += std::strlen(this->format.config.verticalBorder.get());
     }
-    charsPrinted += this->printSpacing(Config::Format::space);
+    charsPrinted += this->printSpacing(this->format.config.space.get());
     const int minWidth = static_cast<int>(std::strlen(this->title));
-    const int maxWidth = totalTableWidth - std::strlen(Config::Format::verticalBorder) - Config::Format::columnSpacing -
-                         Config::Format::columnSpacing - std::strlen(Config::Format::verticalBorder);
-    const int charsPrintedContent =
-        this->printfF(Config::Format::headerRangedFmt, minWidth, Config::maxLengthForPrintfF, this->title);
+    const int maxWidth = totalTableWidth - std::strlen(this->format.config.verticalBorder.get()) -
+                         this->format.config.columnSpacing.get() - this->format.config.columnSpacing.get() -
+                         std::strlen(this->format.config.verticalBorder.get());
+    const int charsPrintedContent = this->printfF(this->format.config.headerRangedFmt.get(), minWidth,
+                                                  this->config.maxLengthForPrintfF.get(), this->title);
     charsPrinted += charsPrintedContent;
     for (int i = 0; i < (maxWidth - charsPrintedContent); i++)
     {
-        charsPrinted += this->printSpacing(Config::Format::space);
+        charsPrinted += this->printSpacing(this->format.config.space.get());
     }
-    charsPrinted += this->printSpacing(Config::Format::space);
-    charsPrinted += this->printfF(Config::Format::verticalBorder);
-    charsPrinted += this->printfF(Config::Format::newline);
+    charsPrinted += this->printSpacing(this->format.config.space.get());
+    charsPrinted += this->printfF(this->format.config.verticalBorder.get());
+    charsPrinted += this->printfF(this->format.config.newline.get());
     return charsPrinted;
 }
 
 int PrettyTable::printHeaderUnderlines()
 {
     int charsPrinted = 0;
-    charsPrinted += this->printfF(Config::Format::corner);
+    charsPrinted += this->printfF(this->format.config.corner.get());
     for (std::size_t i = 0; i < this->descriptors.count(); i++)
     {
-        charsPrinted += this->printSpacing(Config::Format::horizontalBorder);
+        charsPrinted += this->printSpacing(this->format.config.horizontalBorder.get());
         for (std::size_t underlineLeft = this->descriptors[i].width; underlineLeft > 0; underlineLeft--)
         {
-            charsPrinted += this->printfF(Config::Format::horizontalBorder);
+            charsPrinted += this->printfF(this->format.config.horizontalBorder.get());
         }
-        charsPrinted += this->printSpacing(Config::Format::horizontalBorder);
-        charsPrinted += this->printfF(Config::Format::corner);
+        charsPrinted += this->printSpacing(this->format.config.horizontalBorder.get());
+        charsPrinted += this->printfF(this->format.config.corner.get());
     }
-    charsPrinted += this->printfF(Config::Format::newline);
+    charsPrinted += this->printfF(this->format.config.newline.get());
     return charsPrinted;
 }
 
 int PrettyTable::printHeaderNames()
 {
     int charsPrinted = 0;
-    charsPrinted += this->printfF(Config::Format::verticalBorder);
+    charsPrinted += this->printfF(this->format.config.verticalBorder.get());
     for (std::size_t i = 0; i < this->descriptors.count(); i++)
     {
-        charsPrinted += this->printSpacing(Config::Format::space);
+        charsPrinted += this->printSpacing(this->format.config.space.get());
         const int minWidth = static_cast<int>(std::strlen(this->descriptors[i].strName));
         const int maxWidth = static_cast<int>(this->descriptors[i].width);
-        const int charsPrintedContent = this->printfF(Config::Format::headerRangedFmt, minWidth,
-                                                      Config::maxLengthForPrintfF, this->descriptors[i].strName);
+        const int charsPrintedContent =
+            this->printfF(this->format.config.headerRangedFmt.get(), minWidth, this->config.maxLengthForPrintfF.get(),
+                          this->descriptors[i].strName);
         charsPrinted += charsPrintedContent;
         for (int i = 0; i < (maxWidth - charsPrintedContent); i++)
         {
-            charsPrinted += this->printSpacing(Config::Format::space);
+            charsPrinted += this->printSpacing(this->format.config.space.get());
         }
-        charsPrinted += this->printSpacing(Config::Format::space);
-        charsPrinted += this->printfF(Config::Format::verticalBorder);
+        charsPrinted += this->printSpacing(this->format.config.space.get());
+        charsPrinted += this->printfF(this->format.config.verticalBorder.get());
     }
-    charsPrinted += this->printfF(Config::Format::newline);
+    charsPrinted += this->printfF(this->format.config.newline.get());
     return charsPrinted;
 }
 
