@@ -8,26 +8,31 @@
 #include <cstdarg>
 #include <cstddef>
 #include <cstdint>
+#include <cstring>
+#include <iostream>
+#include <string>
 #include <vector>
 
-#define DEBUG
-
+std::array<char, 1024 * 1024> stringBufferTmp;
+std::string actualOutput;
 int customPrintf(const char *fmt, ...)
 {
     va_list args;
     va_start(args, fmt);
-#ifdef DEBUG
-    int result = std::vprintf(fmt, args);
-#else
-    std::array<char, 1> stringBuffer;
-    int result = std::vsnprintf(stringBuffer.data(), stringBuffer.size(), fmt, args);
-#endif
+    int result = std::vsnprintf(stringBufferTmp.data(), stringBufferTmp.size(), fmt, args);
+    if (result > 0)
+    {
+        actualOutput.append(stringBufferTmp.data());
+        std::printf(stringBufferTmp.data());
+    }
     va_end(args);
     return result;
 }
 
 TEST_CASE("prettyTable")
 {
+    actualOutput.clear();
+
     struct User
     {
         const char *name;
@@ -50,28 +55,59 @@ TEST_CASE("prettyTable")
 
     SECTION("PrettyTablePrinter")
     {
-        Fib::Utils::PrettyTablePrinter prettyTablePrinter(customPrintf, title, prettyTableColumnsDescr);
-        for (auto &user : userDataSet)
         {
-            std::array<char, Fib::Utils::Uptime::toStringBufferMinSize> stringBuffer;
-            Fib::Utils::Uptime::toString(user.registrationTimeStamp, stringBuffer.data(), stringBuffer.size());
-            REQUIRE(0 <
-                    prettyTablePrinter.printEntry(user.name, user.age, user.height, user.email, stringBuffer.data()));
+            Fib::Utils::PrettyTablePrinter prettyTablePrinter(customPrintf, title, prettyTableColumnsDescr);
+            for (auto &user : userDataSet)
+            {
+                std::array<char, Fib::Utils::Uptime::toStringBufferMinSize> stringBuffer;
+                Fib::Utils::Uptime::toString(user.registrationTimeStamp, stringBuffer.data(), stringBuffer.size());
+                prettyTablePrinter.printEntry(user.name, user.age, user.height, user.email, stringBuffer.data());
+            }
         }
+
+        const char *expectedOutput =
+            "+-------------------------------------------------------------------------------+\n"
+            "| User list                                                                     |\n"
+            "+------------------+-----+--------+--------------------------+------------------+\n"
+            "| name             | age | height | email                    | is online for    |\n"
+            "+------------------+-----+--------+--------------------------+------------------+\n"
+            "| John Cage        |  22 | 1.23 m | john.cage@bro.com        | 018:23:56:39.087 |\n"
+            "+------------------+-----+--------+--------------------------+------------------+\n"
+            "| Chas Tenenbaum   |  30 | 1.70 m | chasychas@anderson.tv    | 018:23:56:29.087 |\n"
+            "+------------------+-----+--------+--------------------------+------------------+\n"
+            "| Geralt of Rivia  |  35 | 1.87 m | Geralt69420@witchhub.lv  | 018:23:56:37.087 |\n"
+            "+------------------+-----+--------+--------------------------+------------------+\n";
+        REQUIRE(actualOutput.size() == std::strlen(expectedOutput));
+        REQUIRE_THAT(actualOutput.c_str(), Catch::Equals(expectedOutput));
     };
 
     SECTION("PrettyTablePrinterTight")
     {
-        Fib::Utils::PrettyTable prettyTable(customPrintf, title, prettyTableColumnsDescr);
-        prettyTable.config.noHorizontalLinesBetweenEntries.set(true);
-        Fib::Utils::PrettyTablePrinter prettyTablePrinter(prettyTable);
-
-        for (auto &user : userDataSet)
         {
-            std::array<char, Fib::Utils::Uptime::toStringBufferMinSize> stringBuffer;
-            Fib::Utils::Uptime::toString(user.registrationTimeStamp, stringBuffer.data(), stringBuffer.size());
-            REQUIRE(0 <
-                    prettyTablePrinter.printEntry(user.name, user.age, user.height, user.email, stringBuffer.data()));
+            Fib::Utils::PrettyTable prettyTable(customPrintf, title, prettyTableColumnsDescr);
+            prettyTable.config.noHorizontalLinesBetweenEntries.set(true);
+            Fib::Utils::PrettyTablePrinter prettyTablePrinter(prettyTable);
+
+            for (auto &user : userDataSet)
+            {
+                std::array<char, Fib::Utils::Uptime::toStringBufferMinSize> stringBuffer;
+                Fib::Utils::Uptime::toString(user.registrationTimeStamp, stringBuffer.data(), stringBuffer.size());
+                prettyTablePrinter.printEntry(user.name, user.age, user.height, user.email, stringBuffer.data());
+            }
         }
+
+        const char *expectedOutput =
+            "+-------------------------------------------------------------------------------+\n"
+            "| User list                                                                     |\n"
+            "+------------------+-----+--------+--------------------------+------------------+\n"
+            "| name             | age | height | email                    | is online for    |\n"
+            "+------------------+-----+--------+--------------------------+------------------+\n"
+            "| John Cage        |  22 | 1.23 m | john.cage@bro.com        | 018:23:56:39.087 |\n"
+            "| Chas Tenenbaum   |  30 | 1.70 m | chasychas@anderson.tv    | 018:23:56:29.087 |\n"
+            "| Geralt of Rivia  |  35 | 1.87 m | Geralt69420@witchhub.lv  | 018:23:56:37.087 |\n"
+            "+------------------+-----+--------+--------------------------+------------------+\n";
+        REQUIRE(actualOutput.size() == std::strlen(expectedOutput));
+        REQUIRE_THAT(actualOutput.c_str(), Catch::Equals(expectedOutput));
     }
+    actualOutput.clear();
 }
