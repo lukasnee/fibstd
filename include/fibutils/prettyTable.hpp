@@ -67,11 +67,11 @@ private:
         Descriptors(const ColumnDescr *pData, std::size_t count) : pData(pData), cnt(count)
         {
         }
-        const ColumnDescr &operator[](int index) const
+        const ColumnDescr &operator[](std::size_t index) const
         {
             return index < this->cnt ? this->pData[index] : this->empty;
         }
-        const std::size_t count() const
+        std::size_t count() const
         {
             return this->cnt;
         }
