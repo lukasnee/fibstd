@@ -1,7 +1,3 @@
-#pragma once
-
-namespace Fib::Utils
-{
 // TODO: add preconfig and postconfig void(void) optional callbacks.
 
 template <typename T> class ConfigVariable
@@ -23,8 +19,3 @@ public:
 private:
     T value;
 };
-
-#define CONFIG_VARIABLE(type, name, defaultValue)                                                                      \
-    Fib::Utils::ConfigVariable<type> name = Fib::Utils::ConfigVariable<type>(defaultValue)
-
-} // namespace Fib::Utils

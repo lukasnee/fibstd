@@ -4,7 +4,6 @@
 #include <array>
 #include <cstdint>
 
-#include "configVariable.hpp"
 namespace Fib::Utils
 {
 
@@ -42,23 +41,23 @@ public:
     struct Format
     {
     public:
-        struct Config
-        {
-            CONFIG_VARIABLE(std::size_t, columnSpacing, 1);
-            CONFIG_VARIABLE(const char *, corner, "+");
-            CONFIG_VARIABLE(const char *, horizontalBorder, "-");
-            CONFIG_VARIABLE(const char *, verticalBorder, "|");
-            CONFIG_VARIABLE(const char *, newline, "\n");
-            CONFIG_VARIABLE(const char *, space, " ");
-            CONFIG_VARIABLE(const char *, headerRangedFmt, "%-*.*s");
-        } config;
+#define CONFIG_VARS                                                                                                    \
+    CONFIG_VAR(std::size_t, columnSpacing, 1)                                                                          \
+    CONFIG_VAR(const char *, corner, "+")                                                                              \
+    CONFIG_VAR(const char *, horizontalBorder, "-")                                                                    \
+    CONFIG_VAR(const char *, verticalBorder, "|")                                                                      \
+    CONFIG_VAR(const char *, newline, "\n")                                                                            \
+    CONFIG_VAR(const char *, space, " ")                                                                               \
+    CONFIG_VAR(const char *, headerRangedFmt, "%-*.*s")
+#include "fibutils/configTemplate.hpp"
+#undef CONFIG_VARS
     } format;
 
-    struct Config
-    {
-        CONFIG_VARIABLE(bool, noHorizontalLinesBetweenEntries, false);
-        CONFIG_VARIABLE(std::size_t, maxLengthForPrintfF, 64 - sizeof('\0'));
-    } config;
+#define CONFIG_VARS                                                                                                    \
+    CONFIG_VAR(bool, noHorizontalLinesBetweenEntries, false)                                                           \
+    CONFIG_VAR(std::size_t, maxLengthForPrintfF, 64 - sizeof('\0'))
+#include "fibutils/configTemplate.hpp"
+#undef CONFIG_VARS
 
 private:
     class Descriptors

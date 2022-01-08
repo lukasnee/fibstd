@@ -13,19 +13,12 @@
 class Zoo
 {
 public:
-    struct Config
-    {
-        Fib::Utils::ConfigVariable<const char *> name = Fib::Utils::ConfigVariable<const char *>("Harambe");
-        Fib::Utils::ConfigVariable<std::size_t> strength = Fib::Utils::ConfigVariable<std::size_t>(9001);
-        Fib::Utils::ConfigVariable<double> charisma = Fib::Utils::ConfigVariable<double>(100.00);
-    } config;
-
-    struct Config2
-    {
-        CONFIG_VARIABLE(const char *, name, "Harambe");
-        CONFIG_VARIABLE(std::size_t, strength, 9001);
-        CONFIG_VARIABLE(double, charisma, 100.00);
-    } config2;
+#define CONFIG_VARS                                                                                                    \
+    CONFIG_VAR(const char *, name, "Harambe")                                                                          \
+    CONFIG_VAR(std::size_t, strength, 9001)                                                                            \
+    CONFIG_VAR(double, charisma, 100.00)
+#include "fibutils/configTemplate.hpp"
+#undef CONFIG_VARS
 };
 
 TEST_CASE("configTemplateDefault")
