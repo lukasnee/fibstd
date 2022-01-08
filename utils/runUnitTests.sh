@@ -3,5 +3,12 @@
 source "utils/config.sh"
 
 if [[ -d $BUILD_DIR ]]; then
-$BUILD_DIR/tests/fibutilsTests
+
+printf \
+"${ansiColorGreen}${ansiThicknessBold}"\
+"Running unit tests...\n"\
+"===============================================================================\n"\
+"${ansiThicknessReset}${ansiColorReset}"
+
+$BUILD_DIR/tests/fibutilsTests --durations yes
 fi

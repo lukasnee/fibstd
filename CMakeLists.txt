@@ -9,7 +9,11 @@ ADD_LIBRARY(${PROJECT_NAME} STATIC
     src/uptime.cpp
 )
 
-target_include_directories(${PROJECT_NAME} PRIVATE 
+add_compile_options(
+    -Wall -Wextra -O3 #-ggdb
+)
+
+include_directories(
     ${CMAKE_SOURCE_DIR}/include
 )
 
