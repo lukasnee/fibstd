@@ -6,26 +6,26 @@ namespace Fib::Std
 #if __cplusplus
 #if (__cplusplus >= (2017'00)) // for constexpr lambda
 
-#define BITFIELD_WIDTH(StructType, bitfieldName)                                                                       \
+#define FIBSTD_BITFIELD_WIDTH(bitfieldContainerType, bitfieldName)                                                            \
     []() constexpr->std::size_t                                                                                        \
     {                                                                                                                  \
-        StructType structure{};                                                                                        \
-        --structure.data.fields.bitfieldName;                                                                          \
+        bitfieldContainerType container{};                                                                             \
+        --container.bitfieldName;                                                                                      \
         std::size_t bitCount = 0;                                                                                      \
-        while (structure.data.fields.bitfieldName != 0)                                                                \
+        while (container.bitfieldName != 0)                                                                            \
         {                                                                                                              \
-            structure.data.fields.bitfieldName >>= 1;                                                                  \
+            container.bitfieldName >>= 1;                                                                              \
             ++bitCount;                                                                                                \
         }                                                                                                              \
         return bitCount;                                                                                               \
     }                                                                                                                  \
     ()
 
-#define BITFIELD_MAX(StructType, bitfieldName)                                                                         \
+#define FIBSTD_BITFIELD_MAX(bitfieldContainerType, bitfieldName)                                                                      \
     []() constexpr->std::size_t                                                                                        \
     {                                                                                                                  \
-        StructType structure{};                                                                                        \
-        return --structure.data.fields.bitfieldName;                                                                   \
+        bitfieldContainerType container{};                                                                                     \
+        return --container.bitfieldName;                                                                               \
     }                                                                                                                  \
     ()
 

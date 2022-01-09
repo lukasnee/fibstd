@@ -7,6 +7,7 @@ ADD_EXECUTABLE(${PROJECT_NAME}
     configTemplateTests.cpp
     prettyTableTests.cpp
     uptimeTests.cpp
+    bitfieldTests.cpp
 )
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} fibstd)
