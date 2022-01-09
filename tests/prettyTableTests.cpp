@@ -2,8 +2,8 @@
 
 #include "catch.hpp"
 
-#include "fibutils/prettyTable.hpp"
-#include "fibutils/uptime.hpp"
+#include "fibstd/prettyTable.hpp"
+#include "fibstd/uptime.hpp"
 
 #include <cstdarg>
 #include <cstddef>
@@ -47,21 +47,21 @@ TEST_CASE("prettyTable")
                                       {"Geralt of Rivia", 35, 1.87, "Geralt69420@witchhub.lv", 1641397087}}};
 
     const char *title = "User list";
-    const Fib::Utils::PrettyTable::ColumnsDescr<5> prettyTableColumnsDescr = {
+    const Fib::Std::PrettyTable::ColumnsDescr<5> prettyTableColumnsDescr = {
         {{"name", "%s", 16},
          {"age", "%3llu", 3},
          {"height", "%4.2f m", 6},
          {"email", "%s", 24},
-         {"is online for", "%s", Fib::Utils::Uptime::toStringBufferMinSize - 1}}};
+         {"is online for", "%s", Fib::Std::Uptime::toStringBufferMinSize - 1}}};
 
     SECTION("PrettyTablePrinter")
     {
         {
-            Fib::Utils::PrettyTablePrinter prettyTablePrinter(customPrintf, title, prettyTableColumnsDescr);
+            Fib::Std::PrettyTablePrinter prettyTablePrinter(customPrintf, title, prettyTableColumnsDescr);
             for (auto &user : userDataSet)
             {
-                std::array<char, Fib::Utils::Uptime::toStringBufferMinSize> stringBuffer;
-                Fib::Utils::Uptime::toString(user.registrationTimeStamp, stringBuffer.data(), stringBuffer.size());
+                std::array<char, Fib::Std::Uptime::toStringBufferMinSize> stringBuffer;
+                Fib::Std::Uptime::toString(user.registrationTimeStamp, stringBuffer.data(), stringBuffer.size());
                 prettyTablePrinter.printEntry(user.name, user.age, user.height, user.email, stringBuffer.data());
             }
         }
@@ -85,14 +85,14 @@ TEST_CASE("prettyTable")
     SECTION("PrettyTablePrinterTight")
     {
         {
-            Fib::Utils::PrettyTable prettyTable(customPrintf, title, prettyTableColumnsDescr);
+            Fib::Std::PrettyTable prettyTable(customPrintf, title, prettyTableColumnsDescr);
             prettyTable.config.noHorizontalLinesBetweenEntries.set(true);
-            Fib::Utils::PrettyTablePrinter prettyTablePrinter(prettyTable);
+            Fib::Std::PrettyTablePrinter prettyTablePrinter(prettyTable);
 
             for (auto &user : userDataSet)
             {
-                std::array<char, Fib::Utils::Uptime::toStringBufferMinSize> stringBuffer;
-                Fib::Utils::Uptime::toString(user.registrationTimeStamp, stringBuffer.data(), stringBuffer.size());
+                std::array<char, Fib::Std::Uptime::toStringBufferMinSize> stringBuffer;
+                Fib::Std::Uptime::toString(user.registrationTimeStamp, stringBuffer.data(), stringBuffer.size());
                 prettyTablePrinter.printEntry(user.name, user.age, user.height, user.email, stringBuffer.data());
             }
         }

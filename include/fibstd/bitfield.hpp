@@ -1,7 +1,7 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace Fib::Utils
+namespace Fib::Std
 {
 #if __cplusplus
 #if (__cplusplus >= (2017'00)) // for constexpr lambda
@@ -31,4 +31,4 @@ namespace Fib::Utils
 
 #endif
 #endif
-} // namespace Fib::Utils
+} // namespace Fib::Std

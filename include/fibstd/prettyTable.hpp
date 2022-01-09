@@ -4,7 +4,7 @@
 #include <array>
 #include <cstdint>
 
-namespace Fib::Utils
+namespace Fib::Std
 {
 
 class PrettyTable
@@ -49,14 +49,14 @@ public:
     CONFIG_VAR(const char *, newline, "\n")                                                                            \
     CONFIG_VAR(const char *, space, " ")                                                                               \
     CONFIG_VAR(const char *, headerRangedFmt, "%-*.*s")
-#include "fibutils/configTemplate.hpp"
+#include "fibstd/configTemplate.hpp"
 #undef CONFIG_VARS
     } format;
 
 #define CONFIG_VARS                                                                                                    \
     CONFIG_VAR(bool, noHorizontalLinesBetweenEntries, false)                                                           \
     CONFIG_VAR(std::size_t, maxLengthForPrintfF, 64 - sizeof('\0'))
-#include "fibutils/configTemplate.hpp"
+#include "fibstd/configTemplate.hpp"
 #undef CONFIG_VARS
 
 private:
@@ -161,4 +161,4 @@ private:
     PrettyTable prettyTable;
 };
 
-} // namespace Fib::Utils
+} // namespace Fib::Std

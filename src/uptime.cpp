@@ -1,6 +1,6 @@
-#include "fibutils/uptime.hpp"
+#include "fibstd/uptime.hpp"
 
-namespace Fib::Utils
+namespace Fib::Std
 {
 int Uptime::toString(std::uint64_t uptimeInMs, char *stringBufferOut, std::size_t stringBufferMaxSize)
 {
@@ -15,4 +15,4 @@ int Uptime::toString(std::uint64_t uptimeInMs, char *stringBufferOut, std::size_
                                   ".%03lu:", uptimeMilliseconds);
     return charsPrinted;
 }
-} // namespace Fib::Utils
+} // namespace Fib::Std

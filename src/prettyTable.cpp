@@ -1,8 +1,8 @@
-#include "fibutils/prettyTable.hpp"
+#include "fibstd/prettyTable.hpp"
 
 #include <cstring>
 
-namespace Fib::Utils
+namespace Fib::Std
 {
 int PrettyTable::printPaddingAndCloseField(std::size_t descrIndex, std::uint16_t charsAlreadyPrinted)
 {
@@ -154,4 +154,4 @@ int PrettyTable::printHeaderNames()
     return charsPrinted;
 }
 
-} // namespace Fib::Utils
+} // namespace Fib::Std

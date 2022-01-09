@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(fibutilsTests)
+project(fibstdTests)
 
 ADD_EXECUTABLE(${PROJECT_NAME}
     main.cpp
@@ -8,4 +8,4 @@ ADD_EXECUTABLE(${PROJECT_NAME}
     prettyTableTests.cpp
 )
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} fibutils)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} fibstd)

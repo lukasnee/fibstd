@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <type_traits>
 
-namespace Fib::Utils
+namespace Fib::Std
 {
 template <typename Enum> static constexpr std::underlying_type_t<Enum> enumToValue(const Enum &e)
 {
@@ -15,4 +15,4 @@ template <typename Enum> static constexpr Enum valueToEnum(const std::underlying
 {
     return static_cast<Enum>(value);
 }
-} // namespace Fib::Utils
+} // namespace Fib::Std

@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <cstddef>
 
-namespace Fib::Utils
+namespace Fib::Std
 {
 template <typename T> T swapEndian(const T &val)
 {
@@ -25,4 +25,4 @@ template <> std::uint32_t swapEndian(const std::uint32_t &value)
     std::uint32_t tmp = ((value << 8) & 0xFF00FF00) | ((value >> 8) & 0xFF00FF);
     return ((tmp << 16) | (tmp >> 16));
 }
-} // namespace Fib::Utils
+} // namespace Fib::Std

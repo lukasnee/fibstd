@@ -8,7 +8,7 @@
 #include <cstring>
 #include <vector>
 
-#include "fibutils/configVariable.hpp"
+#include "fibstd/configVariable.hpp"
 
 class Zoo
 {
@@ -17,7 +17,7 @@ public:
     CONFIG_VAR(const char *, name, "Harambe")                                                                          \
     CONFIG_VAR(std::size_t, strength, 9001)                                                                            \
     CONFIG_VAR(double, charisma, 100.00)
-#include "fibutils/configTemplate.hpp"
+#include "fibstd/configTemplate.hpp"
 #undef CONFIG_VARS
 };
 
