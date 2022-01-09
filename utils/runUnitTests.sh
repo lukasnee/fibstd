@@ -10,5 +10,5 @@ printf \
 "===============================================================================\n"\
 "${ansiThicknessReset}${ansiColorReset}"
 
-$BUILD_DIR/tests/fibstdTests --durations yes
+$BUILD_DIR/tests/fibstdTests # --durations yes
 fi

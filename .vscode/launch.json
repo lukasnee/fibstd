@@ -8,14 +8,14 @@
             "name": "unit tests",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/.build/tests",
+            "program": "${workspaceFolder}/.build/tests/fibstdTests",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
-            "preLaunchTask": "build tests",
+            "preLaunchTask": "build debug tests",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",

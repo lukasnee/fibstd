@@ -21,6 +21,13 @@
                 "kind": "test",
                 "isDefault": true
             }
+        },
+        {
+            "label": "build debug tests",
+            "type": "shell",
+            "linux": {
+                "command": "utils/build.sh"
+            }
         }
     ],
     "version": "2.0.0"
