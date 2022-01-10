@@ -8,6 +8,7 @@ ADD_EXECUTABLE(${PROJECT_NAME}
     tests/bitfieldTests.cpp
     tests/byteswapTests.cpp
     tests/configTemplateTests.cpp
+    tests/castTests.cpp
     tests/prettyTableTests.cpp
     tests/uptimeTests.cpp
 )
