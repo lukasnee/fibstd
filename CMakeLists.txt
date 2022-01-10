@@ -5,8 +5,8 @@ project(fibstd)
 set(CMAKE_CXX_STANDARD 17)
 
 ADD_LIBRARY(${PROJECT_NAME} STATIC
-    src/prettyTable.cpp
-    src/uptime.cpp
+    source/prettyTable.cpp
+    source/uptime.cpp
 )
 
 add_compile_options(
@@ -14,7 +14,7 @@ add_compile_options(
 )
 
 include_directories(
-    ${CMAKE_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 add_subdirectory(tests)
