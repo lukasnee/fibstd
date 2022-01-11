@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "utils/config.sh"
+source utils/config.sh
 
 # if [[ ! -d $BUILD_DIR ]]; then
     rm -rf $BUILD_DIR

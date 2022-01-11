@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source "utils/config.sh"
+source utils/config.sh
 
-if [[ -d $BUILD_DIR ]]; then
+UNIT_TEST_EXE_PATH="$BUILD_DIR/tests/tests"
+
+if [[ -f $UNIT_TEST_EXE_PATH ]]; then
 
 printf \
 "${ansiColorGreen}${ansiThicknessBold}"\
@@ -10,5 +12,5 @@ printf \
 "===============================================================================\n"\
 "${ansiThicknessReset}${ansiColorReset}"
 
-$BUILD_DIR/tests/fibstdTests # --durations yes
+./$UNIT_TEST_EXE_PATH $@ # --durations yes
 fi
