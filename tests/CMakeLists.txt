@@ -5,6 +5,7 @@ project(${CMAKE_PROJECT_NAME}UnitTests)
 ADD_EXECUTABLE(${PROJECT_NAME}
     source/main.cpp
     # tests/.templateTests.cpp
+    tests/assertTests.cpp
     tests/bitfieldTests.cpp
     tests/byteswapTests.cpp
     tests/configTemplateTests.cpp

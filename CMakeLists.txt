@@ -5,6 +5,7 @@ project(libfibstd)
 set(CMAKE_CXX_STANDARD 17)
 
 ADD_LIBRARY(${PROJECT_NAME} STATIC
+    source/assert.cpp
     source/prettyTable.cpp
     source/uptime.cpp
 )
