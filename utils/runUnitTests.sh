@@ -1,16 +1,17 @@
 #!/bin/bash
 
+set -e
+
 source utils/config.sh
 
-UNIT_TEST_EXE_PATH="$BUILD_DIR/tests/tests"
-
-if [[ -f $UNIT_TEST_EXE_PATH ]]; then
-
-printf \
-"${ansiColorGreen}${ansiThicknessBold}"\
-"Running unit tests...\n"\
-"===============================================================================\n"\
-"${ansiThicknessReset}${ansiColorReset}"
-
-./$UNIT_TEST_EXE_PATH $@ # --durations yes
+if [[ ! -f $UNIT_TEST_EXE_PATH ]]; then
+    printf "${ansiColorRed}error: no unit tests executable. Expected at '$UNIT_TEST_EXE_PATH'\n${ansiColorReset}"
+else
+    printf \
+    "${ansiColorGreen}${ansiThicknessBold}"\
+    "Running unit tests...\n"\
+    "===============================================================================\n"\
+    "${ansiThicknessReset}${ansiColorReset}"
+    
+    ./$UNIT_TEST_EXE_PATH $@ # --durations yes
 fi

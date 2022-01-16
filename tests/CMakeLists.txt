@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(fibstdTests)
+project(${CMAKE_PROJECT_NAME}UnitTests)
 
 ADD_EXECUTABLE(${PROJECT_NAME}
     source/main.cpp
@@ -17,4 +17,4 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} fibstd)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CMAKE_PROJECT_NAME})

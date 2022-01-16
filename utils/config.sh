@@ -2,6 +2,8 @@
 
 set -e
 
+# General:
+
 SCRIPT_DIR="$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 ansiColorReset='\e[0m'
@@ -17,4 +19,8 @@ ansiColorWhite='\e[0;37m'
 ansiThicknessBold='\e[1m'
 ansiThicknessReset='\e[22m'
 
+# Project level:
+
+PROJECT_NAME="libfibstd"
 BUILD_DIR=".build"
+UNIT_TEST_EXE_PATH="$BUILD_DIR/tests/libfibstdUnitTests"
