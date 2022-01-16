@@ -16,6 +16,7 @@ add_compile_options(
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/libraries/eternal/include
 )
 
 add_subdirectory(tests)
